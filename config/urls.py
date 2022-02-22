@@ -18,11 +18,17 @@ from django.urls import path, include
 from rest_framework import routers
 from core.api.viewset import PontoTuristicoViewSet
 from atracoes.api.viewset import AtracoesViewSet
+from enderecos.api.viewset import EnderecoViewSet
+from comentarios.api.viewset import ComentarioViewSet
+from avaliacoes.api.viewset import AvaliacaoViewSet
 
 router = routers.DefaultRouter()
 # Endpoints: Endpoint é a url que me guia para um recurso
-router.register(r'pontoturistico', PontoTuristicoViewSet)
+router.register(r'pontoturistico', PontoTuristicoViewSet, basename='PontoTuristico')
 router.register(r'atracoes', AtracoesViewSet)
+router.register(r'enderecos', EnderecoViewSet)
+router.register(r'comentarios', ComentarioViewSet)
+router.register(r'avaliacoes', AvaliacaoViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
