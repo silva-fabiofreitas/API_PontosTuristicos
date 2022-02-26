@@ -9,4 +9,4 @@ class PontoTuristicoSerializer(ModelSerializer):
         que é exibido ele completo. Se incluir tudo fica muito pesado para um celular
         ou aplicação exibir 
         '''
-        fields = ('id', 'nome', 'descricao') 
+        fields = ('id', 'nome', 'descricao', 'aprovado','foto') 

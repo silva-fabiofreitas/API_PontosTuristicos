@@ -21,6 +21,9 @@ from atracoes.api.viewset import AtracoesViewSet
 from enderecos.api.viewset import EnderecoViewSet
 from comentarios.api.viewset import ComentarioViewSet
 from avaliacoes.api.viewset import AvaliacaoViewSet
+from rest_framework.authtoken.views import obtain_auth_token 
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 # Endpoints: Endpoint é a url que me guia para um recurso
@@ -33,4 +36,5 @@ router.register(r'avaliacoes', AvaliacaoViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-]
+    path('api-token-auth/', obtain_auth_token)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
