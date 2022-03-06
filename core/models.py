@@ -16,5 +16,9 @@ class PontoTuristico(models.Model):
     endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE, null=True, blank=True)
     foto = models.ImageField(upload_to='pontos_turisticos', blank=True, null=True) # instalar a biblioteca pilow para lidar com imagens   
 
+    @property
+    def descricao_completa2(self):
+        return f'{self.nome} - {self.descricao}'
+
     def __str__(self):
         return self.nome

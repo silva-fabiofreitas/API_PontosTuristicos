@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.filters import SearchFilter
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.authentication import TokenAuthentication
 from core.models import PontoTuristico
 from .serializers import PontoTuristicoSerializer
@@ -19,7 +19,7 @@ class PontoTuristicoViewSet(ModelViewSet):
     '''      
     serializer_class = PontoTuristicoSerializer # Quais os campos serão incluidos no json
     filter_backends = (SearchFilter,)
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     authentication_classes = (TokenAuthentication,)
     search_fields = ('^nome', 'descricao', 'endereco__linha1') 
     # lookup_field = ('nome') altera o id de busca na url, tem que ser unico
