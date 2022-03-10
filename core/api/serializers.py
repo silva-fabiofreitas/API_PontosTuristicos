@@ -10,11 +10,14 @@ class PontoTuristicoSerializer(ModelSerializer):
     que é exibido ele completo. Se incluir tudo fica muito pesado para um celular
     ou aplicação exibir.
         SerializerMethodField() # Personaliza o retorno, gera um campo adicional.
-    O ideal é que a regra de negocio fique nos managers ou models
+    O ideal é que a regra de negocio fique nos managers ou models.
+    endereco = SlugRelatedField(slug_field='cidade', read_only=True) ira retorna
+    um campo selecionado ao inves do id 
 
     '''
     atracoes = AtracoesSerializer(many=True) # Serializa objetos aninhados
     endereco = EnderecoSerializer()
+    
     descricao_completa = SerializerMethodField()
 
     class Meta:
