@@ -1,1 +1,1 @@
-web: gunicorn PONTOS_TURISTICOS.wsgi
+web: gunicorn config.wsgi
