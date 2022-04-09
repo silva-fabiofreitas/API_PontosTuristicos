@@ -1,15 +1,21 @@
+from django.http import HttpResponse
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.filters import SearchFilter
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.authentication import TokenAuthentication
-from core.models import PontoTuristico
-from .serializers import PontoTuristicoSerializer
+from core.models import PontoTuristico, DocRG
+from .serializers import PontoTuristicoSerializer, DocRGSerializer
 
 '''
 O viewset é uma view baseada em classe
 '''
 
+class DocRGViewSet(ModelViewSet):
+    queryset = DocRG.objects.all()
+    serializer_class = DocRGSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    authentication_classes = (TokenAuthentication,)
 
 class PontoTuristicoViewSet(ModelViewSet):
     '''
@@ -40,3 +46,17 @@ class PontoTuristicoViewSet(ModelViewSet):
     @action(methods=['GET'], detail=True) # se detail true aponta pra um recurso senão para o endpoint
     def denunciar(self, request, pk=None):
         pass
+
+    @action(methods=['POST'], detail=True) 
+    def associar_atracoes(self, request, pk):
+        """
+            Uma forma de criar um ponto com objeto aninhado uma vez que ele
+        esteja declarado dentro da classe do Serializer
+        """
+        atracoes_id = request.data['ids']
+        ponto = PontoTuristico.objects.get(id=pk)
+        ponto.atracoes.set(atracoes_id)
+
+        ponto.save()
+        return HttpResponse('ok')
+        
