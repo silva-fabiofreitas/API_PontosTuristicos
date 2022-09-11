@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
 # C extensions
 *.so
 imagens/
@@ -130,3 +131,4 @@ dmypy.json
 
 staticfiles
 runserver.bat
+static
