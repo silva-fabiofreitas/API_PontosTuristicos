@@ -3,7 +3,7 @@ asttokens==2.0.5
 attrs==22.1.0
 autopep8==1.6.0
 backcall==0.2.0
-backports.zoneinfo==0.2.1;python_version<"3.9"
+backports.zoneinfo==0.2.1;python_version<"3.9.6-alpine"
 black==22.1.0
 click==8.0.4
 colorama==0.4.4
