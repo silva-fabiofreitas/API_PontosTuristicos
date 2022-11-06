@@ -11,4 +11,4 @@ COPY  requirements-dev.txt requirements.txt ./
 RUN pip install -r requirements.txt
 COPY . .
 
-ENTRYPOINT [ "sh", "./entrypoint.sh" ]
+CMD [ "sh", "./entrypoint.sh" ]
