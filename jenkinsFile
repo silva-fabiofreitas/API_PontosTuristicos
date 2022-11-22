@@ -1,9 +1,15 @@
 pipeline{
     agent any
     stages {
-        stage('Just test'){
+        stage('Build Image'){
             steps {
-                echo 'ola mundo'
+               sh 'docker build -t teste_web:latest .'
+               sh 'docker run --rm teste_web:latest python manage.py check' 
+            }
+        }
+         stage('Check Django'){
+            steps {
+               sh 'docker run --rm teste_web:latest python manage.py check' 
             }
         }
 
