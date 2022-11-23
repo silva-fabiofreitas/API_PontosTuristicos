@@ -1,16 +1,25 @@
-pipeline{
+pipeline {
     agent any
     stages {
+        
         stage('Build Image'){
             steps {
                sh 'docker build -t teste_web:latest .'
             }
         }
-         stage('Check Django'){
+        stage('Check Django'){
             steps {
                sh 'docker run --rm teste_web:latest python manage.py check' 
             }
         }
-
+        stage('Test unit'){
+            steps {
+            sh 'docker run -d --rm --name teste teste_web:latest'
+            sh 'docker exec -i  teste pytest --junitxml=/usr/src/app/report.xml'
+            sh 'docker cp teste:/usr/src/app/report.xml ${WORKSPACE}' 
+            sh 'docker stop teste'
+            junit 'report.xlm'
+           }
+        }
     }
 }
