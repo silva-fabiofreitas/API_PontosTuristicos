@@ -18,7 +18,7 @@ pipeline {
             sh 'docker exec -i  teste pytest --junitxml=/usr/src/app/report.xml'
             sh 'docker cp teste:/usr/src/app/report.xml ${WORKSPACE}' 
             sh 'docker stop teste'
-            junit 'report.xlm'
+            junit 'report.xml'
            }
         }
     }
